@@ -1,0 +1,33 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/catppuccin_mocha.toml"
+]
+
+[window]
+opacity = 0.95
+padding = {x = 0, y = 0}
+dynamic_title = true
+decorations = "Buttonless"
+class = "Alacritty"
+blur = true
+
+[terminal]
+shell = {program = "/usr/bin/zsh", args = ["-l"]}
+
+[font]
+normal = {family = "JetBrainsMono Nerd Font", style = "Bold"}
+size = 14.0
+offset = {x = 0, y = 0}
+glyph_offset = {x = 0, y = 0}
+
+[cursor]
+blink_interval = 500
+unfocused_hollow = false
+thickness = 0.2
+
+  [cursor.style]
+  shape = "block"
+  blinking = "on"
+
+  [cursor.vi_mode_style]
+  shape = "block"
