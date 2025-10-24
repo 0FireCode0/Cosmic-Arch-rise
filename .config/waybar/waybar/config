@@ -1,0 +1,168 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 46,
+    "spacing": 0,
+    "margin": "10 20 -10 20",
+    "modules-left": ["custom/logo", "hyprland/workspaces", "custom/media-icon", "custom/media"],
+    "modules-center": ["cava", "clock", "custom/weather"],
+    "modules-right": ["backlight", "pulseaudio" ,"battery", "hyprland/language","tray", "custom/power"],
+
+    "custom/logo": {
+        "format": "󰣇",
+        "tooltip": true,
+        "tooltip-format": "I use Arch btw.",
+        "on-click": "rofi -show drun",
+        "on-click-right": "alacritty -e btop ",
+        "interval": "once"
+    },
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+	    "format-icons": {
+		    "active": "",
+		    "default": "",
+            "empty": ""
+	    },
+        "on-click": "activate"
+    },
+
+    "custom/media-icon":{
+        "format": " "
+    },
+
+    "custom/media": {
+        "format": "{text}",
+        "return-type": "json",
+        "max-length": 30,
+        "on-click-right": "playerctl play-pause",
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-click-middle": "playerctl previous",
+        "exec": "python3 ~/.config/waybar/custom_modules/media.py"
+    },
+
+    "cava": {
+	    "framerate": 30,
+    	"autosens": 1,
+    	"bars": 10,
+    	"lower_cutoff_freq": 50,
+    	"higher_cutoff_freq": 10000,
+    	"method": "pulse",
+    	"source": "auto",
+    	"stereo": true,
+    	"reverse": false,
+    	"bar_delimiter": 0,
+    	"monstercat": false,
+    	"waves": false,
+    	"noise_reduction": 0.77,
+    	"input_delay": 2,
+    	"format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+    	"actions": {
+    		"on-click-right": "mode"
+    	}
+    },
+
+    "clock": {
+        "interval": 1,
+        "format": " {:%H:%M}",
+        "format-alt": " {:%Y-%m-%d (%a)}",
+        "tooltip-format": "<big>{:%H:%M:%S}</big>\n<tt><small>{calendar}</small></tt>",
+        "locale": "en_US.UTF-8",
+        "timezones": ["Europe/Moscow"],
+        "timezone": "",
+        "calendar": {
+            "mode": "months",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "format": {
+                "today": "<span color='#cba6f7'><b><u>{}</u></b></span>",
+            },
+        },
+        "actions": {
+            "on-click": "alacritty",
+            "on-click-right": "mode",
+            "on-scroll-down": "shift_up",
+            "on-scroll-up": "shift_down",
+            "on-click-middle": "tz_up",
+            "on-click-backward": "tz_down",
+        },
+    },
+
+    "custom/weather": {
+        "exec": "python3 ~/.config/waybar/custom_modules/weather.py",
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": true
+    },
+
+    "network": {
+    	"interface": "wlan0",
+    	"format": "{ifname}",
+    	"format-wifi": "{essid} ({signalStrength}%)  ",
+    	"format-ethernet": "{ifname}  ",
+    	"format-disconnected": "", //An empty format will hide the module.
+    	"format-disconnected": "󰌙 ",
+    	"tooltip-format": "{ifname}",
+    	"tooltip-format-wifi": "{essid} ({signalStrength}%)  ",
+    	"tooltip-format-ethernet": "{ifname}  ",
+    	"tooltip-format-disconnected": "Disconnected",
+	    "max-length": 30
+    },
+
+    "backlight": {
+	    "device": "amd_backlight",
+	    "format": "{percent}% {icon}",
+	    "format-icons": ["", "", "" ,"", ""]
+    },
+
+    "pulseaudio": {
+    	"format": "{volume}% {icon}",
+    	"format-bluetooth": "{volume}% {icon}",
+    	"format-muted": " ",
+    	"format-icons": {
+    		"headphones": "",
+		    "default": [" ", " ", "󰕾 ", " "]
+	    },
+	    "scroll-step": 1,
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+	    "on-click-right": "pavucontrol"
+    },
+
+    "battery": {
+	    "bat": "BAT1",
+	    "interval": 1,
+	    "states": {
+            "good": 100,
+            "normal": 95,
+		    "warning": 20,
+		    "critical": 10,
+        },
+	    "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% {icon}",
+        "format-icons": [" ", " ", " ", " ", " "],
+	    "max-length": 25,
+        "on-click": "alacritty -e sudo powertop",
+        "on-click-right": "killall waybar && waybar"
+    },
+
+    "hyprland/language": {
+	    "format-en": "US",
+	    "format-ru": "RU"
+    },
+
+    "tray": {
+	    "icon-size": 21,
+	    "spacing": 10,
+        "icons": {
+            "blueman": "bluetooth"
+        }
+    },
+
+    "custom/power": {
+        "format": "⏻ ", // Иконка питания
+        "on-click": "~/.config/waybar/custom_modules/power-menu.sh", // Скрипт для показа меню
+        "tooltip": false,
+        "max-length": 10
+    }
+}
