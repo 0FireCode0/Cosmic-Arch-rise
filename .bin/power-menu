@@ -1,5 +1,5 @@
 #!/bin/bash
-chosen=$(printf "Выключить\nПерезагрузка\nСпящий режим\nВыйти\nЗаблокировать" | rofi -dmenu -p "Действие:")
+chosen=$(printf "Выключить\nПерезагрузка\nСпящий режим\nВыйти\nЗаблокировать" | rofi -dmenu -p "Действие")
 
 case "$chosen" in
     "Выключить") systemctl poweroff ;;
